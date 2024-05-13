@@ -59,3 +59,47 @@ const IncorrectUserProfile = ({ user }) => {
   );
 };
 ```
+
+# Open/Closed Principle (OCP)
+
+Software entities should be open for extension, but closed for modification.
+
+Example: Themable Button
+
+# Do:
+
+-- Use props to extend component functionalities without modifying the original component.
+
+```javascript
+// Button.js
+const Button = ({ onClick, children, style }) => {
+  return (
+    <button onClick={onClick} style={style}>
+      {children}
+    </button>
+  );
+};
+
+// Usage
+const PrimaryButton = (props) => {
+  const primaryStyle = { backgroundColor: "blue", color: "white" };
+  return <Button {...props} style={primaryStyle} />;
+};
+```
+
+# Don't:
+
+Modify the original component code to add new styles or behaviors directly.
+
+```javascript
+// IncorrectButton.js
+// Modifying the original Button component directly for a specific style
+const Button = ({ onClick, children, primary }) => {
+  const style = primary ? { backgroundColor: "blue", color: "white" } : null;
+  return (
+    <button onClick={onClick} style={style}>
+      {children}
+    </button>
+  );
+};
+```
