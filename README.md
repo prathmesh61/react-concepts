@@ -108,9 +108,11 @@ const Button = ({ onClick, children, primary }) => {
 
 Objects of a superclass shall be replaceable with objects of its subclasses without breaking the application.
 
+Example: Basic Button and Icon Button
+
 # Do:
 
-Example: Basic Button and Icon Button
+Ensure subclass components can replace superclass components seamlessly.
 
 ```javascript
 // BasicButton.js
