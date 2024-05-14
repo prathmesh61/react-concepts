@@ -103,3 +103,47 @@ const Button = ({ onClick, children, primary }) => {
   );
 };
 ```
+
+# Liskov Substitution Principle (LSP)
+
+Objects of a superclass shall be replaceable with objects of its subclasses without breaking the application.
+
+# Do:
+
+Example: Basic Button and Icon Button
+
+```javascript
+// BasicButton.js
+const BasicButton = ({ onClick, children }) => {
+  return <button onClick={onClick}>{children}</button>;
+};
+
+// IconButton.js
+const IconButton = ({ onClick, icon, children }) => {
+  return (
+    <button onClick={onClick}>
+      <img src={icon} alt="icon" />
+      {children}
+    </button>
+  );
+};
+```
+
+# Don't:
+
+Introduce subclass-specific properties that break functionality when substituting.
+
+```javascript
+// IncorrectIconButton.js
+// This button expects an icon and does not handle the absence of one, breaking when used as a BasicButton
+const IncorrectIconButton = ({ onClick, icon }) => {
+  if (!icon) {
+    throw new Error("Icon is required");
+  }
+  return (
+    <button onClick={onClick}>
+      <img src={icon} alt="icon" />
+    </button>
+  );
+};
+```
