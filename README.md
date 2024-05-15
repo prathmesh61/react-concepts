@@ -149,3 +149,47 @@ const IncorrectIconButton = ({ onClick, icon }) => {
   );
 };
 ```
+
+# Interface Segregation Principle (ISP)
+
+No client should be forced to depend on methods it does not use.
+
+Example: Text Component
+
+# Do:
+
+Provide specific interfaces for different uses.
+
+```javascript
+// Text.js
+const Text = ({ type, children }) => {
+  switch (type) {
+    case "header":
+      return <h1>{children}</h1>;
+    case "title":
+      return <h2>{children}</h2>;
+    default:
+      return <p>{children}</p>;
+  }
+};
+```
+
+# Don't:
+
+Clutter a component with unnecessary properties.
+// IncorrectText.js
+
+```javascript
+// IncorrectText.js
+// This component expects multiple unrelated props, cluttering the interface
+const IncorrectText = ({ type, children, onClick, isLoggedIn }) => {
+  if (isLoggedIn && onClick) {
+    return (
+      <a href="#" onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+  return type === "header" ? <h1>{children}</h1> : <p>{children}</p>;
+};
+```
